@@ -1,0 +1,79 @@
+
+CREATE TABLE IF NOT EXISTS `categorias` (
+  `idCategoria` int NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(100) NOT NULL,
+  PRIMARY KEY (`idCategoria`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE IF NOT EXISTS `clientes` (
+  `codigoClient` varchar(8) NOT NULL,
+  `apellido` varchar(100) NOT NULL,
+  `idMesa` int NOT NULL,
+  `estado` varchar(25) NOT NULL,
+  PRIMARY KEY (`codigoClient`),
+  KEY `idMesa` (`idMesa`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE IF NOT EXISTS `empleados` (
+  `codigo` varchar(8) NOT NULL,
+  `contraseña` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
+  `nombres` varchar(100) NOT NULL,
+  `apellidos` varchar(100) NOT NULL,
+  `rol` varchar(25) NOT NULL,
+  `estado` varchar(25) NOT NULL,
+  PRIMARY KEY (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+INSERT INTO `empleados` (`codigo`, `contraseña`, `nombres`, `apellidos`, `rol`, `estado`) VALUES
+('MS222712', '$2a$10$wGGq5hIGg4YoUe7qP3h5Duf0H9mMJcrWMGvi2.criCPQ6zBWTVdRe', 'Francisco Balmore', 'Mendoza', 'Admin', 'Activo');
+
+
+CREATE TABLE IF NOT EXISTS `mesas` (
+  `idMesa` int NOT NULL AUTO_INCREMENT,
+  `Capacidad` int NOT NULL,
+  `Estado` varchar(25) NOT NULL,
+  PRIMARY KEY (`idMesa`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE IF NOT EXISTS `orden` (
+  `idOrden` int NOT NULL AUTO_INCREMENT,
+  `codigoClient` varchar(8) NOT NULL,
+  `idProducto` int NOT NULL,
+  `cantidad` int NOT NULL,
+  `fecha` datetime NOT NULL,
+  `tiempoEspera` time NOT NULL,
+  `total` int NOT NULL,
+  `estado` varchar(25) NOT NULL,
+  PRIMARY KEY (`idOrden`),
+  KEY `codigoClient` (`codigoClient`),
+  KEY `idProducto` (`idProducto`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE IF NOT EXISTS `productos` (
+  `idProducto` int NOT NULL AUTO_INCREMENT,
+  `idCategoria` int NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `descripcion` varchar(500) NOT NULL,
+  `precio` double NOT NULL,
+  `imagen` varchar(100) NOT NULL,
+  `estado` varchar(25) NOT NULL,
+  PRIMARY KEY (`idProducto`),
+  KEY `idCategoria` (`idCategoria`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+ALTER TABLE `clientes`
+  ADD CONSTRAINT `clientes_ibfk_1` FOREIGN KEY (`idMesa`) REFERENCES `mesas` (`idMesa`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `orden`
+  ADD CONSTRAINT `orden_ibfk_1` FOREIGN KEY (`codigoClient`) REFERENCES `clientes` (`codigoClient`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `orden_ibfk_2` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `productos`
+  ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`idCategoria`) REFERENCES `categorias` (`idCategoria`) ON DELETE CASCADE ON UPDATE CASCADE;
