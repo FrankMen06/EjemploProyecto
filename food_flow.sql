@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 29-08-2024 a las 01:59:00
--- Versión del servidor: 8.0.31
--- Versión de PHP: 8.0.26
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 30-08-2024 a las 00:41:17
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `food_flow`
 --
-CREATE DATABASE IF NOT EXISTS `food_flow` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-USE `food_flow`;
 
 -- --------------------------------------------------------
 
@@ -29,19 +27,12 @@ USE `food_flow`;
 -- Estructura de tabla para la tabla `categorias`
 --
 
-DROP TABLE IF EXISTS `categorias`;
-CREATE TABLE IF NOT EXISTS `categorias` (
-  `idCategoria` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `categorias` (
+  `idCategoria` int(11) NOT NULL,
   `Nombre` varchar(100) NOT NULL,
-  `estado` varchar(100) NOT NULL,
-  PRIMARY KEY (`idCategoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `estado` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Truncar tablas antes de insertar `categorias`
---
-
-TRUNCATE TABLE `categorias`;
 --
 -- Volcado de datos para la tabla `categorias`
 --
@@ -59,24 +50,15 @@ INSERT INTO `categorias` (`idCategoria`, `Nombre`, `estado`) VALUES
 -- Estructura de tabla para la tabla `clientes`
 --
 
-DROP TABLE IF EXISTS `clientes`;
-CREATE TABLE IF NOT EXISTS `clientes` (
+CREATE TABLE `clientes` (
   `codigoClient` varchar(8) NOT NULL,
   `apellido` varchar(100) NOT NULL,
-  `idMesa` int NOT NULL,
+  `idMesa` int(11) NOT NULL,
   `codigo` varchar(8) NOT NULL,
-  `tiempo` int DEFAULT NULL,
-  `estado` varchar(25) NOT NULL,
-  PRIMARY KEY (`codigoClient`),
-  KEY `idMesa` (`idMesa`),
-  KEY `codigo` (`codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `tiempo` int(11) DEFAULT NULL,
+  `estado` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Truncar tablas antes de insertar `clientes`
---
-
-TRUNCATE TABLE `clientes`;
 --
 -- Volcado de datos para la tabla `clientes`
 --
@@ -98,19 +80,12 @@ INSERT INTO `clientes` (`codigoClient`, `apellido`, `idMesa`, `codigo`, `tiempo`
 -- Estructura de tabla para la tabla `comentario`
 --
 
-DROP TABLE IF EXISTS `comentario`;
-CREATE TABLE IF NOT EXISTS `comentario` (
-  `idComentario` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `comentario` (
+  `idComentario` int(11) NOT NULL,
   `comentario` varchar(500) NOT NULL,
-  `idProducto` int NOT NULL,
-  PRIMARY KEY (`idComentario`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `idProducto` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Truncar tablas antes de insertar `comentario`
---
-
-TRUNCATE TABLE `comentario`;
 --
 -- Volcado de datos para la tabla `comentario`
 --
@@ -124,13 +99,12 @@ INSERT INTO `comentario` (`idComentario`, `comentario`, `idProducto`) VALUES
 -- Estructura de tabla para la tabla `empleados`
 --
 
-DROP TABLE IF EXISTS `empleados`;
-CREATE TABLE IF NOT EXISTS `empleados` (
+CREATE TABLE `empleados` (
   `codigo` varchar(8) NOT NULL,
-  `contraseña` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `nombre1` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `contraseña` varchar(200) NOT NULL,
+  `nombre1` varchar(100) NOT NULL,
   `nombre2` varchar(100) NOT NULL,
-  `apellido1` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `apellido1` varchar(100) NOT NULL,
   `apellido2` varchar(100) NOT NULL,
   `correo` varchar(200) NOT NULL,
   `telefono` varchar(10) NOT NULL,
@@ -142,15 +116,9 @@ CREATE TABLE IF NOT EXISTS `empleados` (
   `sexo` varchar(20) NOT NULL,
   `estadoCivil` varchar(50) NOT NULL,
   `rol` varchar(25) NOT NULL,
-  `estado` varchar(25) NOT NULL,
-  PRIMARY KEY (`codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `estado` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Truncar tablas antes de insertar `empleados`
---
-
-TRUNCATE TABLE `empleados`;
 --
 -- Volcado de datos para la tabla `empleados`
 --
@@ -170,22 +138,14 @@ INSERT INTO `empleados` (`codigo`, `contraseña`, `nombre1`, `nombre2`, `apellid
 -- Estructura de tabla para la tabla `mesas`
 --
 
-DROP TABLE IF EXISTS `mesas`;
-CREATE TABLE IF NOT EXISTS `mesas` (
-  `idMesa` int NOT NULL AUTO_INCREMENT,
-  `Capacidad` int NOT NULL,
+CREATE TABLE `mesas` (
+  `idMesa` int(11) NOT NULL,
+  `Capacidad` int(11) NOT NULL,
   `descripcion` varchar(300) NOT NULL,
-  `id_Sector` int NOT NULL,
-  `Estado` varchar(25) NOT NULL,
-  PRIMARY KEY (`idMesa`),
-  KEY `id_Sector` (`id_Sector`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id_Sector` int(11) NOT NULL,
+  `Estado` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Truncar tablas antes de insertar `mesas`
---
-
-TRUNCATE TABLE `mesas`;
 --
 -- Volcado de datos para la tabla `mesas`
 --
@@ -205,27 +165,18 @@ INSERT INTO `mesas` (`idMesa`, `Capacidad`, `descripcion`, `id_Sector`, `Estado`
 -- Estructura de tabla para la tabla `orden`
 --
 
-DROP TABLE IF EXISTS `orden`;
-CREATE TABLE IF NOT EXISTS `orden` (
-  `idOrden` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `orden` (
+  `idOrden` int(11) NOT NULL,
   `codigoClient` varchar(8) NOT NULL,
-  `idProducto` int NOT NULL,
-  `cantidad` int NOT NULL,
+  `idProducto` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
   `fecha` datetime NOT NULL,
   `tiempoEspera` time DEFAULT NULL,
   `total` double NOT NULL,
   `comentario` varchar(200) NOT NULL,
-  `estado` varchar(25) NOT NULL,
-  PRIMARY KEY (`idOrden`),
-  KEY `codigoClient` (`codigoClient`),
-  KEY `idProducto` (`idProducto`)
-) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `estado` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Truncar tablas antes de insertar `orden`
---
-
-TRUNCATE TABLE `orden`;
 --
 -- Volcado de datos para la tabla `orden`
 --
@@ -266,25 +217,17 @@ INSERT INTO `orden` (`idOrden`, `codigoClient`, `idProducto`, `cantidad`, `fecha
 -- Estructura de tabla para la tabla `productos`
 --
 
-DROP TABLE IF EXISTS `productos`;
-CREATE TABLE IF NOT EXISTS `productos` (
-  `idProducto` int NOT NULL AUTO_INCREMENT,
-  `idCategoria` int NOT NULL,
+CREATE TABLE `productos` (
+  `idProducto` int(11) NOT NULL,
+  `idCategoria` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `descripcion` varchar(500) NOT NULL,
   `precio` double NOT NULL,
   `imagen` varchar(100) NOT NULL,
   `tiempo` time NOT NULL,
-  `estado` varchar(25) NOT NULL,
-  PRIMARY KEY (`idProducto`),
-  KEY `idCategoria` (`idCategoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `estado` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Truncar tablas antes de insertar `productos`
---
-
-TRUNCATE TABLE `productos`;
 --
 -- Volcado de datos para la tabla `productos`
 --
@@ -304,21 +247,14 @@ INSERT INTO `productos` (`idProducto`, `idCategoria`, `nombre`, `descripcion`, `
 -- Estructura de tabla para la tabla `sector`
 --
 
-DROP TABLE IF EXISTS `sector`;
-CREATE TABLE IF NOT EXISTS `sector` (
-  `id_Sector` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `sector` (
+  `id_Sector` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
-  `capacidad` int NOT NULL,
+  `capacidad` int(11) NOT NULL,
   `descripcion` varchar(300) NOT NULL,
-  `estado` varchar(50) NOT NULL,
-  PRIMARY KEY (`id_Sector`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `estado` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Truncar tablas antes de insertar `sector`
---
-
-TRUNCATE TABLE `sector`;
 --
 -- Volcado de datos para la tabla `sector`
 --
@@ -330,6 +266,104 @@ INSERT INTO `sector` (`id_Sector`, `nombre`, `capacidad`, `descripcion`, `estado
 (12, 'Salón', 3, 'Con música envivo', 'Eliminada'),
 (13, 'Salón', 3, 'Ambientación músical', 'activa'),
 (14, 'Un nuevo sector', 2, 'Con música envivo', 'activa');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`idCategoria`);
+
+--
+-- Indices de la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  ADD PRIMARY KEY (`codigoClient`),
+  ADD KEY `idMesa` (`idMesa`),
+  ADD KEY `codigo` (`codigo`);
+
+--
+-- Indices de la tabla `comentario`
+--
+ALTER TABLE `comentario`
+  ADD PRIMARY KEY (`idComentario`);
+
+--
+-- Indices de la tabla `empleados`
+--
+ALTER TABLE `empleados`
+  ADD PRIMARY KEY (`codigo`);
+
+--
+-- Indices de la tabla `mesas`
+--
+ALTER TABLE `mesas`
+  ADD PRIMARY KEY (`idMesa`),
+  ADD KEY `id_Sector` (`id_Sector`);
+
+--
+-- Indices de la tabla `orden`
+--
+ALTER TABLE `orden`
+  ADD PRIMARY KEY (`idOrden`),
+  ADD KEY `codigoClient` (`codigoClient`),
+  ADD KEY `idProducto` (`idProducto`);
+
+--
+-- Indices de la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD PRIMARY KEY (`idProducto`),
+  ADD KEY `idCategoria` (`idCategoria`);
+
+--
+-- Indices de la tabla `sector`
+--
+ALTER TABLE `sector`
+  ADD PRIMARY KEY (`id_Sector`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT de la tabla `comentario`
+--
+ALTER TABLE `comentario`
+  MODIFY `idComentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de la tabla `mesas`
+--
+ALTER TABLE `mesas`
+  MODIFY `idMesa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT de la tabla `orden`
+--
+ALTER TABLE `orden`
+  MODIFY `idOrden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+
+--
+-- AUTO_INCREMENT de la tabla `productos`
+--
+ALTER TABLE `productos`
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- AUTO_INCREMENT de la tabla `sector`
+--
+ALTER TABLE `sector`
+  MODIFY `id_Sector` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Restricciones para tablas volcadas
