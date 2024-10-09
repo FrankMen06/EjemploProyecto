@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="../templates/menuMesero.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="content">
+        <h1 class="display-4 text-center">Mesas y Clientes Activos</h1>
+        <p class="lead">Las fichas en color verde son las mesas que se encuentran disponibles y las fichas en color gris las mesas que se encuentran ocupadas.</p>
+        <p:messages id="messages" showDetail="true" showIcon="false">
+            <p:autoUpdate/>
+        </p:messages>
+        <hr class="my-4"/>
+        <br/>
+        <div class="container">
+            <div class="form-group narrow-div float-right" style="width: 25%;">
+                <h:form>
+                    <h:outputText value="Filtrar Sectores:" class="lead font-weight-bold"/>
+                    <h:selectOneMenu class="form-control float-right" id="ordenar" value="#{clientesManaged.idSector}" immediate="true">
+                        <f:selectItem itemLabel="Todas" itemValue="#{0}"/>
+                        <f:selectItems value="#{clientesManaged.modelo.listarMesaCliente(sessionScope.emple.codigo)}" var="s" itemLabel="#{s.mesasByIdMesa.sectorByIdSector.nombre}" itemValue="#{s.mesasByIdMesa.sectorByIdSector.idSector}"/>
+                        <f:ajax event="change" render=":updateOcupado" execute="ordenar" listener="#{clientesManaged.mesasMesero(sessionScope.emple.codigo)}"/>
+                    </h:selectOneMenu>
+                </h:form>
+            </div>
+        </div>
+        <br/><br/><br/><br/>
+        <h:form id="updateOcupado" class="row">
+            <ui:repeat value="#{clientesManaged.mesasMesero(sessionScope.emple.codigo)}" var="client" varStatus="loop">
+                <div class="col-md-4">
+                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                        <div class="card-header text-center"><b>Mesa: </b>##{client.mesasByIdMesa.idMesa} - <b>Capacidad:</b> #{client.mesasByIdMesa.capacidad} personas</div>
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Familia: #{client.apellido}</h5>
+                            <h5 class="card-title text-center">Código: #{client.codigoClient}</h5>
+                            <h5 class="card-title text-center">Atendido por: #{client.empleadoByCodigo.nombre1} #{client.empleadoByCodigo.apellido2}</h5>
+                            <br/>
+                            <center>
+                                <a data-toggle="modal" class="btn btn-outline-light" data-target="#exampleModal#{client.codigoClient}" href="#">Cerrar Cuenta</a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="exampleModal#{client.codigoClient}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog lead" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-center" id="exampleModalLabel">MESA: #{client.mesasByIdMesa.idMesa} - CÓDIGO: #{client.codigoClient}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">X</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="text-center"><b>Familia: #{client.apellido}</b></p>
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Cantidad</th>
+                                            <th scope="col">Producto</th>
+                                            <th scope="col">Precio</th>
+                                            <th scope="col">Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        #{ordenManaged.reiniciarSuma()}
+                                        <ui:repeat value="#{ordenManaged.modelo.carrito(client.codigoClient, 'Entregado')}" var="carrito">
+                                            <tr>
+                                                <td>#{carrito.cantidad}</td>
+                                                <td>#{carrito.productosByIdProducto.nombre}</td>
+                                                <td>$#{carrito.total}</td>
+                                                <td>$#{carrito.total * carrito.cantidad}</td>
+                                            </tr>
+                                            #{ordenManaged.sumar(carrito.total * carrito.cantidad)}
+                                        </ui:repeat>
+                                    </tbody>
+                                </table>
+                                <p><b>Propina: $#{(ordenManaged.totalCarrito * 0.1)}</b></p>
+                                <p><b>SubTotal: $#{ordenManaged.totalCarrito}</b></p>
+                                <p><b>Total: $#{ordenManaged.totalCarrito + ordenManaged.totalCarrito * 0.1}</b></p>
+                                <br/><br/>
+                                <h:outputLabel for="comentario2" styleClass="lead" value="Correo Electronico del cliente: "/>
+                                <h:inputText id="comentario2" styleClass="form-control" value="${clientesManaged.correo}" validator="validaciones"/>
+                                <span class="lead">Opcional en el caso en que el cliente quiera su factura electronica.*</span>
+                            </div>
+                            <div class="modal-footer">
+                                <h:commandButton styleClass="btn btn-outline-danger"  value="Cerrar Cuenta" action="#{clientesManaged.cerrarCuenta(client, client.mesasByIdMesa, client.mesasByIdMesa.sectorByIdSector.idSector, carrito.fecha,'Entregado')}">
+                                    <f:ajax execute="@form" render="@all"/>
+                                </h:commandButton>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui:repeat>
+        </h:form>
+    </ui:define>
+</ui:composition>

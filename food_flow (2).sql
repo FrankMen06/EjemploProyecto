@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-08-2024 a las 00:41:17
+-- Tiempo de generación: 09-10-2024 a las 03:56:33
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -64,15 +64,10 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`codigoClient`, `apellido`, `idMesa`, `codigo`, `tiempo`, `estado`) VALUES
-('a5HN1xoY', 'Rodríguez', 28, 'MA239793', 0, 'Activo'),
-('GSJXaew7', 'Méndez', 28, 'GH235190', 0, 'Inactivo'),
-('h0vPqWGX', 'Vásquez', 29, 'MA239793', 33, 'Inactivo'),
-('t1jcU2uc', 'Vargas', 28, 'RO232124', 15, 'Inactivo'),
-('VwXXdKqP', 'Arévalo', 32, 'RO232124', 0, 'Inactivo'),
-('WzG6kWK3', 'Mendoza', 29, 'RO232124', 0, 'Activo'),
-('y8VOFBN2', 'Hernández', 31, 'MA239793', 0, 'Inactivo'),
-('YfWjBsQO', 'Rodríguez', 29, 'GH235190', 0, 'Inactivo'),
-('YUAnuNIc', 'Menjívar', 28, 'MA239793', 30, 'Inactivo');
+('4vy7FHLh', 'Castillo', 32, 'wa91234', 0, 'Activo'),
+('cliente', 'lopez', 29, 'ms222712', 71, 'Inactivo'),
+('LoneRMJ5', 'perez', 31, 'wa91234', 0, 'Activo'),
+('xLuh7Yby', 'XD', 33, '1234', 0, 'Inactivo');
 
 -- --------------------------------------------------------
 
@@ -91,7 +86,7 @@ CREATE TABLE `comentario` (
 --
 
 INSERT INTO `comentario` (`idComentario`, `comentario`, `idProducto`) VALUES
-(11, 'Solicitud de aprobación denegada - Agregale una descripción más apropiada.\nFecha y Hora: 2023-11-17 15:27:33', 44);
+(12, 'Solicitud de aprobación denegada - no se puede XD\nFecha y Hora: 2024-10-06 20:47:45', 49);
 
 -- --------------------------------------------------------
 
@@ -124,13 +119,13 @@ CREATE TABLE `empleados` (
 --
 
 INSERT INTO `empleados` (`codigo`, `contraseña`, `nombre1`, `nombre2`, `apellido1`, `apellido2`, `correo`, `telefono`, `dui`, `fechaNac`, `direccion`, `municipio`, `departamento`, `sexo`, `estadoCivil`, `rol`, `estado`) VALUES
-('GH235190', '$2a$10$.3lcDIjK2wOwaGjL8usNj.OO9OTGBMczogQ7RuYMlx9QWn/ycGyYO', 'Oscar', 'José', 'Gallegos', 'Hernández', 'kenayhernandez612@gmail.com', '7635-8954', '12345678-6', '2003-06-29', 'Calle a tonacatepeque', 'San Salvador Este', 'San Salvador', 'Masculino', 'Soltera/o', 'Mesero', 'si'),
-('MA239793', '$2a$10$0yXHuCVzKIJ9VSqjQCwlQOAWUKS5ta6hNRrbeExMhQULR/hOME1Zu', 'Julián', 'Alejandro', 'Méndez', 'Arévalo', 'oficial.count.alejandro@gmail.com', '7346-1947', '12345678-1', '2004-10-23', 'Soya', 'Primero seleccione un departamento', 'San Salvador', 'Masculino', 'Soltera/o', 'Mesero', 'si'),
-('MO233776', '$2a$10$SpxbTqpJlocUUOR9WgcKMO9.gXhLybyCnMzIyZ12Yyebr6iBWm3uS', 'Benito', 'Antonio', 'Martinez', 'Ocasio', '29vasquezz@gmail.com', '7389-1256', '12345678-2', '2004-11-01', 'Distrito de soyapango', 'Primero seleccione un departamento', 'San Salvador', 'Masculino', 'Soltera/o', 'Recepcionista', 'si'),
-('Pedidos', '$2a$10$9DuL7UeXm7gMoMW8.SD69uUKla90vb34f9LK13s.zhcZldGpeZ3xG', 'Pedidos', 'Pedidos', 'Pedidos', 'Pedidos', 'Pedidos', 'Pedidos', 'Pedidos', '2004-11-01', 'Pedidos', 'Pedidos', 'Pedidos', 'Pedidos', 'Pedidos', 'Pedidos', 'si'),
-('RO232124', '$2a$10$z8al36HAp0NBdXUUxy27k.QiOqPqAGr20EXyXRDKDM7CemsCWdPom', 'Roberto', 'Carlos', 'Ramirez', 'Ochoa', 'alejandro23.am29@gmail.com', '7695-8954', '12345678-5', '2004-01-29', 'Distrito de soyapango', 'Ahuachapán Norte', 'Ahuachapán', 'Masculino', 'Casada/o', 'Mesero', 'si'),
-('VH235733', '$2a$10$Zc4.sqsBzMxFeer5wGDzA.cgSIRtxHsyIyFp8HsbWCYcLiCx2QQ9i', 'Kennet', 'Adonay', 'Vargas', 'Hernández', 'kennet.vargas1230@gmail.com', '7822-1744', '12345678-3', '2004-12-25', 'Algo', 'San Salvador Este', 'San Salvador', 'Masculino', 'Viuda/o', 'Jefe de cocina', 'si'),
-('VR236114', '$2a$10$QkIfcrO.N8h15KxTawSDHePJHB6urEWsNZB.oI.k2wkzUKp8kaIRe', 'Denis', 'Josué', 'Vásquez', 'Rodríguez', 'imjosuu@gmail.com', '7346-1937', '12345678-4', '2004-01-29', 'Col. san francisco', 'San Salvador Este', 'San Salvador', 'Masculino', 'Soltera/o', 'Administrador', 'si');
+('1234', '1234', 'Oscar', 'José', 'Gallegos', 'Hernández', 'xd@gmail.com', '7635-8954', '12345678-6', '2003-06-29', 'Calle a tonacatepeque', 'San Salvador Este', 'San Salvador', 'Masculino', 'Soltera/o', 'Mesero', 'si'),
+('maca123', '1234', 'maria', 'Josefa', 'Vásquez', 'castillo', 'maria@gmail.com', '7346-1937', '12345678-4', '2004-01-29', 'Soyapango', 'Cuscatlán Norte', 'San Salvador', 'Masculino', 'Soltera/o', 'Administrador', 'si'),
+('mo0111', '1234', 'Benito', 'Antonio', 'Martinez', 'Ocasio', 'xd2@gmail.com', '7389-1256', '12345678-2', '2004-11-01', 'Distrito de soyapango', 'Primero seleccione un departamento', 'San Salvador', 'Masculino', 'Soltera/o', 'Recepcionista', 'si'),
+('ms222712', '1234', 'José', 'Macario', 'Rojas', 'Arévalo', 'oficial.count@gmail.com', '7346-1947', '12345678-1', '2004-10-23', 'Soya', 'Primero seleccione un departamento', 'San Salvador', 'Masculino', 'Soltera/o', 'Mesero', 'si'),
+('Pedidos', '1234', 'Pedidos', 'Pedidos', 'Pedidos', 'Pedidos', 'Pedidos', 'Pedidos', 'Pedidos', '2004-11-01', 'Pedidos', 'Pedidos', 'Pedidos', 'Pedidos', 'Pedidos', 'Pedidos', 'si'),
+('wa91234', '1234', 'Roberto', 'Carlos', 'Ramirez', 'Ochoa', 'kjjkl.am29@gmail.com', '7695-8954', '12345678-5', '2004-01-29', 'Distrito de soyapango', 'Ahuachapán Norte', 'Ahuachapán', 'Masculino', 'Casada/o', 'Mesero', 'si'),
+('xd01', '1234', 'furcio', 'Godofredo', 'murcia', 'Hernández', 'furcio@gmail.com', '7822-1744', '12345678-3', '2004-12-25', 'Algo', 'San Salvador Este', 'San Salvador', 'Masculino', 'Viuda/o', 'Jefe de cocina', 'si');
 
 -- --------------------------------------------------------
 
@@ -152,10 +147,10 @@ CREATE TABLE `mesas` (
 
 INSERT INTO `mesas` (`idMesa`, `Capacidad`, `descripcion`, `id_Sector`, `Estado`) VALUES
 (28, 3, 'Mesa para 3 personas', 9, 'Ocupada'),
-(29, 5, 'Mesa familiar', 9, 'Ocupada'),
+(29, 5, 'Mesa familiar', 9, 'Disponible'),
 (30, 2, 'Mesa para niños', 11, 'Eliminada'),
-(31, 6, ' Mesa para niños', 10, 'Disponible'),
-(32, 4, 'Mesa central', 11, 'Disponible'),
+(31, 6, ' Mesa para niños', 10, 'Ocupada'),
+(32, 4, 'Mesa central', 11, 'Ocupada'),
 (33, 2, 'Mesa1', 14, 'Disponible'),
 (34, 2, 'Mesa2', 14, 'Disponible');
 
@@ -182,34 +177,8 @@ CREATE TABLE `orden` (
 --
 
 INSERT INTO `orden` (`idOrden`, `codigoClient`, `idProducto`, `cantidad`, `fecha`, `tiempoEspera`, `total`, `comentario`, `estado`) VALUES
-(94, 'h0vPqWGX', 44, 2, '2022-09-17 15:35:44', '00:00:00', 5, '', 'Finalizado'),
-(95, 'h0vPqWGX', 43, 2, '2022-10-17 15:35:44', '00:00:00', 5, '', 'Finalizado'),
-(96, 'h0vPqWGX', 46, 2, '2022-11-17 15:36:03', '00:00:00', 1, '', 'Finalizado'),
-(97, 't1jcU2uc', 48, 4, '2022-12-17 15:41:59', '00:00:00', 1, '', 'Finalizado'),
-(98, 't1jcU2uc', 44, 4, '2021-10-17 15:41:59', '00:00:00', 5, '', 'Finalizado'),
-(99, 't1jcU2uc', 43, 4, '2021-11-17 15:41:59', '00:00:00', 5, '', 'Finalizado'),
-(100, 't1jcU2uc', 45, 4, '2021-12-17 15:41:59', '00:00:00', 4, '', 'Finalizado'),
-(101, 't1jcU2uc', 46, 2, '2021-11-17 15:41:59', '00:00:00', 1, '', 'Finalizado'),
-(102, 'GSJXaew7', 43, 4, '2023-10-17 16:12:48', '00:00:00', 5, '', 'Finalizado'),
-(103, 'GSJXaew7', 44, 3, '2021-10-17 16:12:48', '00:00:00', 5, '', 'Finalizado'),
-(104, 'GSJXaew7', 45, 4, '2023-11-17 16:12:48', '00:00:00', 4, '', 'Finalizado'),
-(105, 'GSJXaew7', 46, 6, '2023-11-17 16:12:48', '00:00:00', 1, '', 'Finalizado'),
-(106, 'GSJXaew7', 48, 5, '2023-11-17 16:12:48', '00:00:00', 1, '', 'Finalizado'),
-(107, 'GSJXaew7', 44, 3, '2023-11-17 16:16:02', '00:00:00', 5, '', 'Finalizado'),
-(108, 'GSJXaew7', 45, 5, '2023-11-17 16:16:02', '00:00:00', 4, '', 'Finalizado'),
-(109, 'GSJXaew7', 46, 3, '2023-11-10 16:16:02', '00:00:00', 1, '', 'Finalizado'),
-(110, 'GSJXaew7', 48, 4, '2023-11-10 16:16:02', '00:00:00', 1, '', 'Finalizado'),
-(111, 'GSJXaew7', 43, 3, '2023-11-10 16:16:02', '00:00:00', 5, '', 'Finalizado'),
-(112, 'VwXXdKqP', 46, 1, '2023-11-10 16:17:20', '00:00:00', 1, '', 'Finalizado'),
-(113, 'VwXXdKqP', 45, 2, '2023-11-11 16:17:20', '00:00:00', 4, '', 'Finalizado'),
-(114, 'VwXXdKqP', 43, 3, '2023-11-12 16:17:20', '00:00:00', 5, '', 'Finalizado'),
-(115, 'y8VOFBN2', 44, 3, '2023-11-13 16:19:40', '00:00:00', 5, '', 'Finalizado'),
-(116, 'YfWjBsQO', 44, 2, '2023-11-17 16:21:03', '00:00:00', 5, '', 'Finalizado'),
-(117, 'GSJXaew7', 44, 1, '2023-11-17 16:21:35', '00:00:00', 5, '', 'Finalizado'),
-(118, 'YUAnuNIc', 44, 1, '2023-11-17 16:40:13', '00:00:00', 5, '', 'Finalizado'),
-(119, 'YUAnuNIc', 45, 2, '2023-11-17 16:40:24', '00:00:00', 4, '', 'Finalizado'),
-(120, 'a5HN1xoY', 43, 3, '2023-11-17 17:39:54', '00:00:00', 5, 'Sin mayonesa xd', 'Carrito'),
-(121, 'a5HN1xoY', 44, 2, '2023-11-17 17:40:16', '00:00:00', 5, 'Sin queso', 'Carrito');
+(122, 'cliente', 44, 1, '2024-10-06 21:00:16', '00:00:00', 5, 'comida recien hecha :>', 'Finalizado'),
+(123, 'cliente', 43, 5, '2024-10-06 21:00:16', '00:00:00', 5, 'Comida Caliente', 'Finalizado');
 
 -- --------------------------------------------------------
 
@@ -233,13 +202,13 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`idProducto`, `idCategoria`, `nombre`, `descripcion`, `precio`, `imagen`, `tiempo`, `estado`) VALUES
-(43, 22, 'Pollo frito', 'Delicioso pollo frito', 5, 'IMG235287.png', '00:00:00', 'Aceptado'),
+(43, 22, 'Pollo frito', 'Delicioso pollo frito', 5, 'fondo.jpg', '00:00:00', 'Aceptado'),
 (44, 22, 'Pizza', 'Deliciosa pizza', 5, 'IMG233184.png', '00:00:00', 'Aceptado'),
 (45, 22, 'Hamburguesa', 'Deliciosa hamburguesa', 4, 'IMG237379.png', '00:00:00', 'Aceptado'),
 (46, 23, 'Powerade', 'Powerade azul', 1, 'IMG233140.png', '00:00:00', 'Aceptado'),
 (47, 23, 'Té de melocotón', 'Té de lipton', 1, 'IMG232270.png', '00:00:00', 'Pendiente'),
 (48, 23, 'Coca-Cola lata', 'Gaseosa Coca-Cola lata', 1, 'IMG232135.png', '00:00:00', 'Aceptado'),
-(49, 27, 'Hamburguesa Jumbo', 'Deliciosa hamburguesa grande', 4, 'IMG231811.png', '00:00:00', 'Pendiente');
+(49, 27, 'Hamburguesa Jumbo', 'Deliciosa hamburguesa grande', 4, 'IMG231811.png', '00:00:00', 'Rechazado');
 
 -- --------------------------------------------------------
 
@@ -339,7 +308,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `idComentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idComentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `mesas`
@@ -351,7 +320,7 @@ ALTER TABLE `mesas`
 -- AUTO_INCREMENT de la tabla `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `idOrden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `idOrden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`

@@ -25,7 +25,7 @@ public class LoginModel {
     public EmpleadosEntity datosSession(String codigo) {
         EntityManager em = JpaUtil.getEntityManager();
         try {
-            //Recupero el objeto desde la BD a través del método find
+            //Recupera el objeto desde la BD a través del método find
             EmpleadosEntity empleado = em.find(EmpleadosEntity.class, codigo);
             em.close();
             return empleado;

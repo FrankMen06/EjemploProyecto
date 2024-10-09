@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="../templates/menuRecepcion.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:define name="content">
+        <h1 class="display-4">Hola #{sessionScope.emple.nombre1} #{sessionScope.emple.apellido1}!</h1>
+        <p class="lead">¡Bienvenid@ a FoodFlow! Aquí, podrás administrar aperturar y asignar una mesa a los clientes.</p>
+        <hr class="my-4"/>
+        <br/>
+        <center>
+        <div class="card-deck">
+            <div class="card">
+                <br/>
+                <h:commandLink action="empleados.xhtml">
+                    <h1 class="text-center movimiento"><i class="fa-solid fa-users fa-2xl" style="color: #45448d;"></i></h1>
+                </h:commandLink>
+                <div class="card-body">
+                    <h5 class="card-title lead text-center fade-text">CUENTA DE CLIENTES</h5>
+                </div>
+            </div>
+        </div>
+        </center>
+        <h:form id="meserosYmesas">
+            <div class="custom-modal" id="customModal">
+                <span class="close-modal" onclick="toggleCustomModal()"><b>X</b></span>
+                <ui:repeat value="#{empleadoManaged.modelo.listarMeseros()}" var="e" >
+                    <ui:repeat value="#{clientesManaged.modelo.listarMesaCliente(e.codigo)}" var="f" varStatus="loop">
+                        <ui:fragment rendered="#{loop.last}">
+                            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                                <div class="card-header">#{e.codigo}</div>
+                                <div class="card-body">
+                                    <h5 class="card-title">#{e.nombre1} #{e.nombre2} #{e.apellido1} #{e.apellido2}</h5>
+                                    <p class="card-text"><b>Cantidad de mesas:</b> #{loop.index + 1}</p>
+                                </div>
+                            </div>
+                        </ui:fragment>
+                        <ui:fragment rendered="#{clientesManaged.modelo.listarMesaCliente(e.codigo).size() == 0}">
+                            <h1 class="lead"><b>No hay clientes activos.</b></h1>
+                        </ui:fragment>
+                    </ui:repeat>
+                </ui:repeat>
+            </div>
+
+            <div class="overlay" id="overlay" onclick="toggleCustomModal()"></div>
+        </h:form>
+    </ui:define>
+</ui:composition>
